@@ -355,7 +355,7 @@ class Test(unittest.TestCase):
         config = fetch_config("chairs")
         if config and config['write_ch_chmp_merge']:
             mep_by_year.to_csv(
-                f"{config['test_out_dir']}{self.what_time_it_is()}_chair-chairmp_merge.csv",
+                f"{config['test_out_dir']}/{self.what_time_it_is()}_chair-chairmp_merge.csv",
                 sep=';',
                 index=False)
         chair_mp = pd.merge(chair_mp, mep_by_year, on=["person_id", "parliament_year"], how="left")
@@ -364,7 +364,7 @@ class Test(unittest.TestCase):
             outdf = chair_mp.loc[pd.isna(chair_mp["role"])].copy()
             if not outdf.empty:
                 outdf.to_csv(
-                    f"{config['test_out_dir']}{self.what_time_it_is()}_trouble-matching-yearize.csv",
+                    f"{config['test_out_dir']}/{self.what_time_it_is()}_trouble-matching-yearize.csv",
                     sep=';',
                     index=False)
 
