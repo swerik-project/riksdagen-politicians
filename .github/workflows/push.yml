@@ -45,3 +45,23 @@ jobs:
         echo "throw ERROR on inconsistencies on our side"
         echo "WARN on upstream errors"
         python -m unittest test.db
+
+  mandates:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install .
+        pip install pytest-cfg-fetcher
+    - name: Test manually curated mandate dates do not change
+      run: |
+        python -m unittest test.mandates
