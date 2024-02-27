@@ -39,7 +39,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyriksdagen
         pip install pytest-cfg-fetcher
-     - name: Test metadata integrity
+    - name: Test metadata integrity
       run: |
         echo "Test that there are no duplicates in the DB"
         echo "throw ERROR on inconsistencies on our side"
