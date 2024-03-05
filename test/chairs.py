@@ -447,7 +447,7 @@ class Test(unittest.TestCase):
         self.assertTrue(no_chair_hogs)
 
 
-    @unittest.skip
+    #@unittest.skip
     def test_knaMP(self):
         """
         Check no one is sharing a chare
