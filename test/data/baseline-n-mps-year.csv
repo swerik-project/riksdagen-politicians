@@ -93,7 +93,6 @@ year,chamber,protocol_spec,n_mps,source
 1907,fk,,150,inferred
 1908,ak,,230,inferred
 1908,fk,,150,inferred
-1909,,,230,inferred
 1909,ak,,230,stjernquist1996:122
 1909,fk,,150,stjernquist1996:122
 1910,ak,,230,inferred
