@@ -2,8 +2,16 @@
 
 This directory contains mostly manually curated data used to triangulate wikidata-queried data.
 
-Separator for all == ;
 
+## Baseline N MPs year
+
+- year
+- chamber
+- protocol_spec
+- n_mps
+- source
+
+Separator == ,
 
 ## Known iorter
 
@@ -15,10 +23,20 @@ Stjernquist, Nils, Tvåkammartiden: Sveriges riksdag 1867-1970, Sveriges riksdag
 
 The csv-file consists of four columns: 
 
-- swerik_id
+- person_id
 - surname
 - first_name
 - iort
+
+Separator == ;
+
+## Mandate Dates
+
+- date
+- type
+- person_id
+
+Separator == ;
 
 ## Known MPs catalog
 The catalog -- `known-mps-catalog.csv` -- was compiled by Emil (@emla5688) and Magnus (@salgo60) using the  (Norberg et al, 1986, or Norberg and Asker, 1996) books and wikidata.
@@ -28,16 +46,17 @@ Bob (@BobBorges) cleaned the csv: strings containing commas (now a semi-colonsv 
 In theory, it contains all MPs for period (1867--1993/94).
 
 The csv-file consists of three columns: 
-- swerik_id: MP's person id, 
+- person_id: MP's person id, 
 - surname_iort: surname and iort,
 - name: first name(s),
 - born: birth date or birth year
 - source: the page, book number and book (Norberg et al, 1986, or Norberg and Asker, 1996)
 
-
 Anders Norberg m. fl. Tvåkammarriksdagen 1867-1970. Ledamöter och valkretsar. Sveriges Riksdag och Almqvist & Wiksell, 1986
 
 Norberg, Anders, and Björn Asker. Enkammarriksdagen: 1971-1993/94: ledamöter och valkretsar. Almqvist & Wiksell, 1996.
+
+Separator == ;
 
 ## session-dates.csv
 
@@ -46,3 +65,5 @@ All the dates scraped from parliamentary records.
 Columns:
 - protocol: protocol (record)
 - date: date
+
+Separator == ;
