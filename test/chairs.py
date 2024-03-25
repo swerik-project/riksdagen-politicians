@@ -316,6 +316,7 @@ class Test(unittest.TestCase):
                             missing_in_R.append([y, c])
                             warnings.warn(f"{y}: {c}", ChairMissingFromRange)
                 elif len(enk_chairs) > len(year_chair_mp_chairs)+len(excludes):
+                    [print(_) for _ in enk_chairs if _ not in year_chair_mp_chairs]
                     self.assertFalse(True, "¡Sth is super wrong!")
         if len(OutOfRange) > 0:
             if config and config["write_chair_nrs_in_range"]:
@@ -338,7 +339,7 @@ class Test(unittest.TestCase):
     #  --->  Test integrity of bum to chair mapping
     # ---------------------------------------------
     #
-    @unittest.skip
+    #@unittest.skip
     def test_chair_hogs(self):
         """
         check no single person sits in two places at once
@@ -447,7 +448,7 @@ class Test(unittest.TestCase):
         self.assertTrue(no_chair_hogs)
 
 
-    @unittest.skip
+    #@unittest.skip
     def test_knaMP(self):
         """
         Check no one is sharing a chare
@@ -511,7 +512,11 @@ class Test(unittest.TestCase):
                         ranges = sorted(ranges, key=lambda x: (x[0], x[1]))
                         for ridx, _range in enumerate(ranges):
                             if ridx < len(ranges)-1:
-                                delta = (datetime.strptime(_range[1], "%Y-%m-%d") - datetime.strptime(ranges[ridx+1][0], "%Y-%m-%d")).days
+                                try:
+                                    delta = (datetime.strptime(_range[1], "%Y-%m-%d") - datetime.strptime(ranges[ridx+1][0], "%Y-%m-%d")).days
+                                except:
+                                    print("~~~~~~~~~XXXX", ranges[ridx+1][0], _range[1])
+                                    self.assertTrue(False)
                                 if max(0, delta) > 0:
                                     issues = pd.concat([issues,df], ignore_index=True)
                                     if dup not in kh:
@@ -540,7 +545,7 @@ class Test(unittest.TestCase):
     #  --->  Test coverage
     # ---------------------
     #
-    @unittest.skip
+    #@unittest.skip
     def test_chair_coverage(self):
         """
         test all chairs are filled
