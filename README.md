@@ -11,7 +11,7 @@ Contains metadata on individuals.
 
 ### The `test/` directory
 
-Contains integrity tests related to the riksdagen-politicians repository.
+Contains integrity tests related to the riksdagen-persons repository.
 
 ### The `quality_estimation/` directory
 
