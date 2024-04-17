@@ -32,5 +32,5 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: metadata.zip
+        file: persons.zip
         tag: ${{ github.ref }}
