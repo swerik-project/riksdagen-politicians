@@ -26,7 +26,7 @@ jobs:
         pip install pyriksdagen
         pip install cycler
     - name: Zip metadata
-      run: zip -r metadata.zip riksdagen-persons/data
+      run: zip -r persons.zip data
 
     - name: Upload metadata to release
       uses: svenstaro/upload-release-action@v2
