@@ -1,4 +1,4 @@
-name: Perform unit tests
+name: "Riksdagen Persons: data integrity tests"
 
 on: [push]
 
