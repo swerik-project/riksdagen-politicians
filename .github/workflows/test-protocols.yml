@@ -40,8 +40,6 @@ jobs:
         ls -la
         unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/test/*
         unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/data/*
-    - name: Move files
-      run: |
         rsync -vr riksdagen-records-$RECORDS_TAGNR/ .
         ls -l data
         ls -l test
