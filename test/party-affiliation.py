@@ -38,7 +38,7 @@ class Test(unittest.TestCase):
         df.to_csv(f"{outdir}/{now}_{name_str}.csv", index=False)
 
 
-    @unittest.skip
+    #@unittest.skip
     def test_independent_mp(self):
         config = fetch_config("independent-mp")
         test_file = pd.read_csv("test/data/independent-mp.csv", sep=';')
@@ -67,6 +67,7 @@ class Test(unittest.TestCase):
         #self.assertEqual(len(extra_ind), 0)
 
 
+    #@unittest.skip
     def test_party(self):
         config = fetch_config("party-affiliation")
         test_file = pd.read_csv("test/data/known-party-affiliation.csv", sep=';')
