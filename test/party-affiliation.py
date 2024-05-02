@@ -74,7 +74,6 @@ class Test(unittest.TestCase):
 
         bad_affil = []
         for i, r in test_file.iterrows():
-            [print(type(r[_])) for _ in test_file.columns]
             if (pd.notnull(r['start']) or r['start'] == '') and \
                (pd.notnull(r["end"]) or r['end'] == ''):
                 Q = party_affiliation.loc[
