@@ -15,9 +15,9 @@ jobs:
       matrix:
         python-version: [3.8]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
@@ -25,6 +25,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyriksdagen
         pip install pytest-cfg-fetcher
+    - name: Install jq
+      uses: dcarbone/install-jq-action@v2
+      with:
+        version: 1.7
+        force: false
     - name: get records
       run: |
         RECORDS_INFO="$(curl -L https://api.github.com/repos/swerik-project/riksdagen-records/releases/latest)"
@@ -32,8 +37,9 @@ jobs:
         echo "RECORDS_TAG=$RECORDS_TAG" >> $GITHUB_ENV
         curl -LO https://github.com/swerik-project/riksdagen-records/archive/refs/tags/${{ env.RECORDS_TAG }}.zip
         RECORDS_TAGNR=$(echo ${RECORDS_TAG:1})
-        unzip riksdagen-records-$RECORDS_TAGNR.zip test -d test
-        unzip riksdagen-records-$RECORDS_TAGNR.zip data -d data
+        ls -la
+        unzip riksdagen-records-$RECORDS_TAGNR.zip riksdagen-records-$RECORDS_TAGNR/test -d test
+        unzip riksdagen-records-$RECORDS_TAGNR.zip riksdagen-records-$RECORDS_TAGNR/data -d data
     - name: mp-test
       run: |
         python -m unittest test.mp
