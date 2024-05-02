@@ -34,8 +34,7 @@ jobs:
       run: |
         RECORDS_INFO="$(curl -L https://api.github.com/repos/swerik-project/riksdagen-records/releases/latest)"
         RECORDS_TAG="$(echo $RECORDS_INFO | jq -r .tag_name)"
-        echo "RECORDS_TAG=$RECORDS_TAG" >> $GITHUB_ENV
-        curl -LO https://github.com/swerik-project/riksdagen-records/archive/refs/tags/${{ env.RECORDS_TAG }}.zip
+        curl -LO https://github.com/swerik-project/riksdagen-records/archive/refs/tags/$RECORDS_TAG .zip
         RECORDS_TAGNR=$(echo ${RECORDS_TAG:1})
         ls -la
         unzip riksdagen-records-$RECORDS_TAGNR.zip riksdagen-records-$RECORDS_TAGNR/test -d test
