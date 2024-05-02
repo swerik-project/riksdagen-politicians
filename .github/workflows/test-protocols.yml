@@ -40,11 +40,12 @@ jobs:
         unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/test/*
         unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/data/*
     - name: Move files
-      uses: GuillaumeFalourd/setup-rsync@v1.2
-      run: |
-        rsync -vr riksdagen-records-$RECORDS_TAGNR/ .
-        ls -l data
-        ls -l test
+      steps:
+        - uses: GuillaumeFalourd/setup-rsync@v1.2
+        - run: |
+            rsync -vr riksdagen-records-$RECORDS_TAGNR/ .
+            ls -l data
+            ls -l test
     - name: mp-test
       run: |
         python -m unittest test.mp
