@@ -31,8 +31,9 @@ jobs:
         RECORDS_TAG="$(echo $RECORDS_INFO | jq -r .tag_name)"
         echo "RECORDS_TAG=$RECORDS_TAG" >> $GITHUB_ENV
         curl -LO https://github.com/swerik-project/riksdagen-records/archive/refs/tags/${{ env.RECORDS_TAG }}.zip
-        unzip riksdagen-records-${{ env.RECORDS_TAG:1 }}.zip test -d test
-        unzip riksdagen-records-${{ env.RECORDS_TAG:1 }}.zip data -d data
+        RECORDS_TAGNR=$(echo ${RECORDS_TAG:1})
+        unzip riksdagen-records-$RECORDS_TAGNR.zip test -d test
+        unzip riksdagen-records-$RECORDS_TAGNR.zip data -d data
     - name: mp-test
       run: |
         python -m unittest test.mp
