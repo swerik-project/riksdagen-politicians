@@ -16,6 +16,7 @@ jobs:
         python-version: [3.8]
     steps:
     - uses: actions/checkout@v4
+    - uses: up9cloud/action-rsync@1.4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
@@ -37,8 +38,11 @@ jobs:
         curl -LO https://github.com/swerik-project/riksdagen-records/archive/refs/tags/$RECORDS_TAG.zip
         RECORDS_TAGNR=$(echo ${RECORDS_TAG:1})
         ls -la
-        unzip riksdagen-records-$RECORDS_TAGNR.zip riksdagen-records-$RECORDS_TAGNR/test -d test
-        unzip riksdagen-records-$RECORDS_TAGNR.zip riksdagen-records-$RECORDS_TAGNR/data -d data
+        unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/test/*
+        unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/data/*
+        tree -d -L 2
+        rsync -vr riksdagen-records-$RECORDS_TAGNR/ .
+        tree -d -L 2
     - name: mp-test
       run: |
         python -m unittest test.mp
