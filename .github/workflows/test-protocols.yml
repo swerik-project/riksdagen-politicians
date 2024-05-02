@@ -16,7 +16,6 @@ jobs:
         python-version: [3.8]
     steps:
     - uses: actions/checkout@v4
-    - uses: up9cloud/action-rsync@master
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
@@ -40,9 +39,12 @@ jobs:
         ls -la
         unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/test/*
         unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/data/*
-        tree -d -L 2
+    - name: Move files
+      uses: GuillaumeFalourd/setup-rsync@v1.2
+      run: |
         rsync -vr riksdagen-records-$RECORDS_TAGNR/ .
-        tree -d -L 2
+        ls -l data
+        ls -l test
     - name: mp-test
       run: |
         python -m unittest test.mp
