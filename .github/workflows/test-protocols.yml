@@ -1,0 +1,38 @@
+name: "Test persons repo agains records for misplaced MPs"
+
+on:
+  pull_request:
+    branches:
+      - 'dev'
+      - 'main'
+  push:
+    branches:
+      - 'pr-to-dev'
+jobs:
+  mp-unittest:
+    runs-on:  ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyriksdagen
+        pip install pytest-cfg-fetcher
+    - name: get records
+      run: |
+        RECORDS_INFO="$(curl -L https://api.github.com/repos/swerik-project/riksdagen-records/releases/latest)"
+        RECORDS_TAG="$(echo $RECORDS_INFO | jq -r .tag_name)"
+        echo "RECORDS_TAG=$RECORDS_TAG" >> $GITHUB_ENV
+        curl -LO https://github.com/swerik-project/riksdagen-records/archive/refs/tags/${{ env.RECORDS_TAG }}.zip
+        unzip riksdagen-records-${{ env.RECORDS_TAG:1 }}.zip test -d test
+        unzip riksdagen-records-${{ env.RECORDS_TAG:1 }}.zip data -d data
+    - name: mp-test
+      run: |
+        python -m unittest test.mp
