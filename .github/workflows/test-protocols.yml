@@ -20,6 +20,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+    - uses: GuillaumeFalourd/setup-rsync@v1.2
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -40,12 +41,10 @@ jobs:
         unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/test/*
         unzip $RECORDS_TAG.zip riksdagen-records-$RECORDS_TAGNR/data/*
     - name: Move files
-      steps:
-        - uses: GuillaumeFalourd/setup-rsync@v1.2
-        - run: |
-            rsync -vr riksdagen-records-$RECORDS_TAGNR/ .
-            ls -l data
-            ls -l test
+      run: |
+        rsync -vr riksdagen-records-$RECORDS_TAGNR/ .
+        ls -l data
+        ls -l test
     - name: mp-test
       run: |
         python -m unittest test.mp
