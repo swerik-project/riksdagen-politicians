@@ -5,9 +5,7 @@ on:
     branches:
       - 'dev'
       - 'main'
-  push:
-    branches:
-      - 'pr-to-dev'
+
 jobs:
   mp-unittest:
     runs-on:  ubuntu-latest
