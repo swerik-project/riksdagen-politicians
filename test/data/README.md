@@ -13,6 +13,13 @@ This directory contains mostly manually curated data used to triangulate wikidat
 
 Separator == ,
 
+## independent-mp
+
+- wiki_id
+- person_id
+
+Separator == ;
+
 ## Known iorter
 
 This folder contains known place specifiers -- so called i-ort -- for each MP. One row per i-ort in the case when an MP's i-ort changed. 
@@ -39,6 +46,7 @@ Separator == ;
 Separator == ;
 
 ## Known MPs catalog
+
 The catalog -- `known-mps-catalog.csv` -- was compiled by Emil (@emla5688) and Magnus (@salgo60) using the  (Norberg et al, 1986, or Norberg and Asker, 1996) books and wikidata.
 
 Bob (@BobBorges) cleaned the csv: strings containing commas (now a semi-colonsv file), aligned columns, filled in some missing info and split iort from the surname.
@@ -57,6 +65,21 @@ Anders Norberg m. fl. Tvåkammarriksdagen 1867-1970. Ledamöter och valkretsar. 
 Norberg, Anders, and Björn Asker. Enkammarriksdagen: 1971-1993/94: ledamöter och valkretsar. Almqvist & Wiksell, 1996.
 
 Separator == ;
+
+## known party affiliation
+
+- person_id
+- start
+- end
+- party_id
+
+Separator == ;
+
+## Not mp
+
+Some wiki IDs have caused recurring problems in that the entity to which they refer shares a name with an MP and get relabled as such. Here we start a list of such cases so we can eventually implement a test.
+
+- wiki_id
 
 ## session-dates.csv
 
