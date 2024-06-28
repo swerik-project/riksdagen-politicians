@@ -69,7 +69,7 @@ class Test(unittest.TestCase):
         if len(rows) > 0:
             print("FAIL, some IDs out of range")
 
-            print(len(rows), "out of correct time range", len(rows)/len(names))
+            print(len(rows), "out of correct time range", len(rows)/len(affil))
             if config and config["write-oor"]:
                 df = pd.DataFrame(rows, columns=cols)
                 print(df['party_id'].value_counts())
@@ -77,7 +77,7 @@ class Test(unittest.TestCase):
 
         if len(unlisted_parties) > 0:
             print("FAIL, some data IDs not in test set")
-            print(len(unlisted_parties), "are found in the data but not our list of parties", len(unlisted_parties)/len(names))
+            print(len(unlisted_parties), "are found in the data but not our list of parties", len(unlisted_parties)/len(affil))
             if config and config["write-not-found-test"]:
                 df = pd.DataFrame(unlisted_parties, columns=unlisted_cols)
                 print(df['party_id'].value_counts())
